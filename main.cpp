@@ -1,47 +1,50 @@
 #include <iostream>
-
+#include <vector>
 
 using namespace std;
 
-const int N = 5;// Define a constant N with a value of 5, representing the size of the array
 
-// Function to sort the array in ascending order using Bubble Sort
-void sortuj(int A[]) {
-    // Outer loop to ensure multiple passes through the array
-    for(int i = 1; i < N; i++) {
-        // Inner loop to compare adjacent elements and swap if needed
-        for(int j = 0; j < N - 1; j++) {
-            // If the current element is greater than the next, swap them
-            if(A[j] > A[j + 1])
-                swap(A[j], A[j + 1]);  // Swap the elements
+// Function to swap the values of two integers by reference
+void swap(int &a, int &b) {
+    int temp = a;
+    a = b;
+    b = temp;
+}
+
+
+// Function to perform bubble sort on the given vector
+void bubbleSort(vector<int> &arr) {
+    int n = arr.size(); // Get the size of the array
+
+    // Outer loop that goes through each element of the array
+    for (int i = 0; i < n - 1; i++) {
+
+        // Inner loop that compares adjacent elements and swaps them if necessary
+        for (int j = 0; j < n - i - 1; j++) {
+
+            // If the current element is greater than the next one, swap them
+            if (arr[j] > arr[j + 1]) {
+                swap(arr[j], arr[j + 1]); // Call the swap function to swap elements at index 'j' and 'j+1'
+            }
         }
     }
 }
 
-int main() {
-    // Initialize an array A of 5 integers with given values
-    int A[5] = {13, 9, 17, 5, 15};
 
-    // Display the array before sorting
-    cout << "Not sorted: " << endl;
-    for(int i = 0; i < N; i++) {
-        cout << A[i] << " ";  // Print each element followed by a space
+// Function to print the elements of the array
+void printArray(const vector<int> &arr) {
+    // Iterate through each element in the array and print it
+    for (int num : arr) {
+        cout << num << " ";
     }
-
-    sortuj(A);  // Call the sortuj function to sort the array
-
-    cout << endl;  // Print a newline for better formatting
-
-    // Display the array after sorting
-    cout << "Sorted: " << endl;
-    for(int i = 0; i < N; i++) {
-        cout << A[i] << " ";  // Print each sorted element followed by a space
-    }
-
-    return 0;  // Return 0 to indicate successful program execution
+    cout << endl;
 }
 
-/*Idea algorytmu polega na porównywaniu sąsiednich elementów i zamienianiu ich miejscami,
-jeśli są w złej kolejności. Proces powtarza się wielokrotnie, aż lista będzie posortowana.*/
+int main() {
+    vector<int> arr = {10, 7, 8, 9, 1, 5};
+    bubbleSort(arr);
+    cout << "Sorted array: ";
+    printArray(arr);
 
-
+    return 0;
+}
